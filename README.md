@@ -10,3 +10,4 @@ React Framework
 >    2. npm install react-router
 >    3. npm install react-router-dom
 >    4. npm install reactstrap
+>    5. npm install react-redux
