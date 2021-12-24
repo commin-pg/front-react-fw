@@ -11,3 +11,7 @@ React Framework
 >    3. npm install react-router-dom
 >    4. npm install reactstrap
 >    5. npm install react-redux
+
+> branch : react-basic-chat
+> install module for this branch
+>   1. npm install socket.io
