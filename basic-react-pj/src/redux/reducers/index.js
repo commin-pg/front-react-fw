@@ -35,7 +35,7 @@ const todosReducer = (state = todoInitialState, action) => {
         case type.TODO_TOGGLE:
             return {
                 input: state.input,
-                todos: state.todos.map(todo.id === action.id ? { ...todo, checked: !todo.checked } : todo)
+                todos: state.todos.map(todo.id === action.id ? { ...state.todos, checked: !todo.checked } : todo)
             };
 
         default: state;

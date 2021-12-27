@@ -5,6 +5,8 @@ import TodoItemList from "./components/TodoItemList";
 
 class App extends Component {
 
+
+
   /*
   초기 State 정의
   */
@@ -82,6 +84,8 @@ class App extends Component {
   */
 
   render() {
+    console.log(this.props)
+
     const { input, todos } = this.state;
     const {
       handleChange,

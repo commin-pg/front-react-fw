@@ -5,13 +5,12 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 // Redux - Store import
-import App, { reducer } from './App';
-import { createStore } from 'redux';
+import App from './App';
+import store from './redux/store'
 import { Provider } from 'react-redux';
 
 // Reudx - Store import end
 
-const store = createStore(reducer); // 여러개의 reducer를 store가 관리
 
 ReactDOM.render(
   <Provider store={store}> {/* Provider가 App Component로 store 제공 */}
