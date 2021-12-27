@@ -1,13 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+
 import reportWebVitals from './reportWebVitals';
 
+// Redux - Store import
+import App, { reducer } from './App';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+// Reudx - Store import end
+
+const store = createStore(reducer); // 여러개의 reducer를 store가 관리
+
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}> {/* Provider가 App Component로 store 제공 */}
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
