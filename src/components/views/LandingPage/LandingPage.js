@@ -12,19 +12,31 @@ function LandingPage() {
         [] // movies array
     )
     const [MainMovieImage, setMainMovieImage] = useState(null)
+    const [CurrentPage, setCurrentPage] = useState(1)
+
+    const fetchMovies = (endpoint) =>{
+        fetch(endpoint)
+        .then(response => response.json())
+        .then(response => {
+            console.log(response)
+            console.log(response.results ? response.results[0] : null)
+            console.log(response.results[0].backdrop_path)
+            setMovies([...Movies, ...response.results])
+            setMainMovieImage(response.results ? response.results[0] : null)
+            setCurrentPage(response.page)
+        })
+    }
 
 
     useEffect(() => {
         const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`
-        fetch(endpoint)
-            .then(response => response.json())
-            .then(response => {
-                console.log(response.results ? response.results[0] : null)
-                console.log(response.results[0].backdrop_path)
-                setMovies(response.results)
-                setMainMovieImage(response.results ? response.results[0] : null)
-            })
+        fetchMovies(endpoint);
     }, [])
+
+    const loadMoreItems = () => {
+        const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${CurrentPage + 1}`
+        fetchMovies(endpoint);
+    }
 
     return (
         <div style={{ width: '100%', margin: '0' }}>
@@ -43,7 +55,7 @@ function LandingPage() {
                 <h2>Movies by latest</h2>
                 <hr />
                 {/* Movie Grid Cards */}
-                <Row gutter={[16,16]}>
+                <Row gutter={[16, 16]}>
 
                     {Movies && Movies.map((movie, index) => (
                         <React.Fragment key={index}>
@@ -59,7 +71,7 @@ function LandingPage() {
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <button>Load More</button>
+                <button onClick={loadMoreItems}>Load More</button>
             </div>
         </div>
     )
