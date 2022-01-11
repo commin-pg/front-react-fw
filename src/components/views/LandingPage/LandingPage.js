@@ -1,50 +1,64 @@
-import React,{useEffect,useState} from 'react'
+import { Row } from 'antd';
+import React, { useEffect, useState } from 'react'
 import { FaCode } from "react-icons/fa";
 import { API_KEY, API_URL, IMAGE_BASE_URL } from '../../Config';
+import GridCard from '../commons/GridCard';
 import MainImage from './Sections/MainImage';
 
 
 function LandingPage() {
 
     const [Movies, setMovies] = useState(
-         [] // movies array
-        )
+        [] // movies array
+    )
     const [MainMovieImage, setMainMovieImage] = useState(null)
 
 
-    useEffect(()=>{
+    useEffect(() => {
         const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`
         fetch(endpoint)
-        .then(response => response.json())
-        .then(response => {
-            console.log(response.results?response.results[0]:null)
-            console.log(response.results[0].backdrop_path)
-            setMovies(response.results)
-            setMainMovieImage(response.results?response.results[0]:null)
-        })
+            .then(response => response.json())
+            .then(response => {
+                console.log(response.results ? response.results[0] : null)
+                console.log(response.results[0].backdrop_path)
+                setMovies(response.results)
+                setMainMovieImage(response.results ? response.results[0] : null)
+            })
     }, [])
 
     return (
-        <div style={{ width : '100%', margin : '0' }}>
+        <div style={{ width: '100%', margin: '0' }}>
             {/* Main Image */}
-            
-            {MainMovieImage && 
-            <MainImage 
-            image={`${IMAGE_BASE_URL}w1280${MainMovieImage.backdrop_path}`} 
-            title={MainMovieImage.title}
-            text = {MainMovieImage.overview}
-            />}
 
-            
+            {MainMovieImage &&
+                <MainImage
+                    image={`${IMAGE_BASE_URL}w1280${MainMovieImage.backdrop_path}`}
+                    title={MainMovieImage.title}
+                    text={MainMovieImage.overview}
+                />}
 
-            <div style={ {width : '85%' , margin: '1rem auto'}}>
+
+
+            <div style={{ width: '85%', margin: '1rem auto' }}>
                 <h2>Movies by latest</h2>
-                <hr/>
+                <hr />
                 {/* Movie Grid Cards */}
+                <Row gutter={[16,16]}>
+
+                    {Movies && Movies.map((movie, index) => (
+                        <React.Fragment key={index}>
+                            <GridCard
+                                image={movie.poster_path ? `${IMAGE_BASE_URL}w500${movie.poster_path}` : null}
+                                movieId={movie.id}
+                                movieName={movie.original_title} />
+                        </React.Fragment>
+                    ))}
+                </Row>
+
 
             </div>
 
-            <div style={{ display:'flex', justifyContent:'center'}}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <button>Load More</button>
             </div>
         </div>
