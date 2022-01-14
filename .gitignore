@@ -4,7 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
-
+/basic-react-pj
 # testing
 /coverage
 

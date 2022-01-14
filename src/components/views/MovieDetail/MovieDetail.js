@@ -4,8 +4,8 @@ import { API_KEY, API_URL, IMAGE_BASE_URL } from '../../Config';
 import GridCard from '../commons/GridCard';
 import MainImage from '../LandingPage/Sections/MainImage';
 import Favorite from './Sections/Favorite';
+import Liked from './Sections/Liked';
 import MovieInfo from './Sections/MovieInfo';
-
 
 function MovieDetail(props) {
     let movieId = props.match.params.movieId;
@@ -79,6 +79,14 @@ function MovieDetail(props) {
                         ))}
                     </Row>
                 }
+
+                {/* Like and UnLike */}
+                <div style={{ display: 'flex', justifyContent: 'center', margin: '2rem' }}>
+                    <Liked movieId={movieId} userFrom={localStorage.getItem('userId')} />
+                </div>
+
+                {/* Apply */}
+
             </div>
         </div>
     )
