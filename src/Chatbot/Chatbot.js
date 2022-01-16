@@ -1,8 +1,16 @@
 import Axios from 'axios'
 import React from 'react'
 import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { saveMessage } from '../_actions/message_actions'
+import Message from './Sections/Message'
+
 
 function Chatbot() {
+
+    const dispatch = useDispatch()
+    const messageFromRedux = useSelector(state => state.message.messages)
+
     useEffect(() => {
         eventQuery('welcomeToMyWebSite')
 
@@ -18,21 +26,27 @@ function Chatbot() {
             }
         }
 
+
+        dispatch(saveMessage(conversation))
+
         const textQueryVariables = {
             text
         }
 
         try {
+
+            console.log('I Sent : ', conversation)
             // async await 를 구현하기위해 then 으로 response 를 받지 않는다.
             const response = await Axios.post('/api/dialogflow/textQuery', textQueryVariables)
-            console.log('RESPONSE !! : ', response)
-            const content = response.data.fulfillmentMessages[0]
 
-            conversation = {
-                who: 'bot',
-                content: content
+            for (let content of response.data.fulfillmentMessages) {
+                conversation = {
+                    who: 'bot',
+                    content: content
+                }
+                dispatch(saveMessage(conversation))
+
             }
-
 
         } catch (error) {
             console.log(error)
@@ -44,6 +58,8 @@ function Chatbot() {
                     }
                 }
             }
+
+            dispatch(saveMessage(conversation))
         }
 
         console.log(conversation)
@@ -66,7 +82,7 @@ function Chatbot() {
                 content: content
             }
 
-            console.log(conversation)
+            dispatch(saveMessage(conversation))
 
 
         } catch (error) {
@@ -79,7 +95,7 @@ function Chatbot() {
                     }
                 }
             }
-            console.log(conversation)
+            dispatch(saveMessage(conversation))
         }
     }
 
@@ -93,6 +109,31 @@ function Chatbot() {
             e.target.value = "";
         }
     }
+
+    const renderOneMessage = (message, i) => {
+        console.log("renderOneMessage : ", message, i)
+        return <>
+            <Message
+                key={i}
+                message={message}
+            ></Message>
+        </>
+    }
+
+
+
+
+    const renderMessage = (returnMessage) => {
+        if (returnMessage) {
+            return returnMessage.map((message, i) => {
+                return renderOneMessage(message, i);
+            })
+        } else {
+            return null
+        }
+
+    }
+
     return (
         <div style={{
             heigth: 700, width: 700,
@@ -100,7 +141,7 @@ function Chatbot() {
         }}>
 
             <div style={{ height: 644, width: '100%', overflow: 'auto' }}>
-
+                {renderMessage(messageFromRedux)}
             </div>
 
             <input style={{ margin: 0, width: '100%', height: 50, borderRadius: '4px', padding: '5px', fontSize: '1rem' }}
