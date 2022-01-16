@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { saveMessage } from '../_actions/message_actions'
 import Message from './Sections/Message'
-
+import CardMessage from './Sections/CardMessage'
 
 function Chatbot() {
 
@@ -75,14 +75,15 @@ function Chatbot() {
         try {
             // async await 를 구현하기위해 then 으로 response 를 받지 않는다.
             const response = await Axios.post('/api/dialogflow/eventQuery', eventQueryVariables)
-            const content = response.data.fulfillmentMessages[0]
+            console.log('event response : ', response.data.fulfillmentMessages)
+            for (let content of response.data.fulfillmentMessages) {
+                let conversation = {
+                    who: 'bot',
+                    content: content
+                }
 
-            let conversation = {
-                who: 'bot',
-                content: content
+                dispatch(saveMessage(conversation))
             }
-
-            dispatch(saveMessage(conversation))
 
 
         } catch (error) {
@@ -110,14 +111,26 @@ function Chatbot() {
         }
     }
 
+
+
     const renderOneMessage = (message, i) => {
         console.log("renderOneMessage : ", message, i)
-        return <>
-            <Message
-                key={i}
-                message={message}
-            ></Message>
-        </>
+
+        if (message.content && message.content.text && message.content.text.text[0]) {
+            return <>
+                <Message
+                    key={i}
+                    message={message}
+                ></Message>
+            </>
+        } else if (message.content && message.content.payload && message.content.payload.fields && message.content.payload.fields.card) {
+            return <div>
+                <CardMessage
+                    message={message}
+                />
+            </div>
+        }
+
     }
 
 

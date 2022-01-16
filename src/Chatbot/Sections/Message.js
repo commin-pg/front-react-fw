@@ -1,10 +1,7 @@
 import React from 'react'
 import { List, Icon, Avatar } from 'antd'
 function Message(props) {
-
-
-    const avatarSrc = props.message.who === 'bot' ? <Icon type='robot'/> : <Icon type='smile'/>
-
+    const avatarSrc = props.message.who === 'bot' ? <Icon type='robot' /> : <Icon type='smile' />
     return (
         <div>
             <List.Item  style={{ padding: '1rem' }}>

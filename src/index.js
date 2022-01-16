@@ -13,6 +13,7 @@ import ReduxThunk from 'redux-thunk';
 import { BrowserRouter } from "react-router-dom";
 
 import * as serviceWorker from "./serviceWorker";
+
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
 
 ReactDOM.render(
