@@ -1,16 +1,24 @@
-import React from 'react'
+import React from "react";
 import { FaCode } from "react-icons/fa";
-
+import TopImageComponent from "../../items/TopImageComponent/TopImageComponent";
 function LandingPage() {
-    return (
-        <>
-            <div className="app">
-                <FaCode style={{ fontSize: '4rem' }} /><br />
-                <span style={{ fontSize: '2rem' }}>Let's Start Coding!</span>
-            </div>
-            <div style={{ float: 'right' }}>Thanks For Using This Boiler Plate by John Ahn</div>
-        </>
-    )
+  return (
+    <>
+      <div className="img-container">
+        <TopImageComponent
+          height="780px"
+          backgroundImg={
+            "https://icampus.dongguk.edu/data/file/dongguk4_1/thumb-3529417547_puYVS1Z5_c11efdfccfff9ffe841dc84de5b54a7303ece2e2_800x450.jpg"
+          }
+        />
+      </div>
+      <div className="body-container">
+        <FaCode style={{ fontSize: "4rem" }} />
+        <br />
+        <span style={{ fontSize: "2rem" }}>Let's Start Coding!</span>
+      </div>
+    </>
+  );
 }
 
-export default LandingPage
+export default LandingPage;

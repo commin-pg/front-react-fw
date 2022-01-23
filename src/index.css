@@ -37,3 +37,23 @@ input.error {
   height: 5px;
   margin-top: -12px;
 }
+
+
+
+.img-container{
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.body-container{
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.img-container .body-container{
+  width: 100%;
+  height: 100%;
+  /* 새롭게 추가된 부분 */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-attachment: fixed;
+}
