@@ -1,28 +1,24 @@
-.top-img-section {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-  position: relative;
-}
-
-.top-img-section .top-img-box {
-  height: 100%;
-}
-
-.top-img-section .top-img-box .top-img {
+.top-img-box {
   width: 100%;
-  height: 100%;
+  height: 700px;
+  
+}
+.top-img-block{
+  height: 30%;
+}
+.top-img-title{
+  color: white;
+  font-size: 3rem;
+  text-align: left;
+  padding: 20px;
+  line-height: 120%;
+
 }
 
-.top-img-text-box {
-  border: 3px solid rgb(7, 7, 7);
-  position: absolute;
-}
-.top-img-title {
-  font-size: 3.2rem;
-  font-weight: bold;
-}
+.top-img-content{
+  color: white;
+  font-size: 2rem;
+  text-align: left;
 
-.top-img-content {
-  font-size: 1.2rem;
-  font-weight: bold;
+  padding: 20px;
 }

@@ -4,28 +4,21 @@ import "./TopImageComponent.css";
 function TopImageComponent(props) {
   console.log(props);
 
+  const styles = {
+    ods: {
+      background: 'URL("../.././image/image1.jpg") 50% 0 no-repeat fixed',
+      height: "400px",
+    },
+  };
+
   return (
-    <section
-      className="top-img-section"
-    >
-      <div className="top-img-box">
-        <div
-          className="top-img"
-          style={{
-           
-            backgroundImage: "url(" + props.backgroundImg + ")",
-          }}
-        ></div>
+    <div className="top-img-box" style={styles.ods}>
+      <div className="top-img-block"></div>
+      <div className="top-img-title">{props.title}</div>
+      <div className="top-img-content">
+        <h2>unique handmade <br />leather</h2>
       </div>
-      <div className="top-img-text-box">
-        <div className="top-img-title" style={{ color: "black" }}>
-          마마마마
-        </div>
-        <div className="top-img-content" style={{ color: "white" }}>
-          마마마마
-        </div>
-      </div>
-    </section>
+    </div>
   );
 }
 
