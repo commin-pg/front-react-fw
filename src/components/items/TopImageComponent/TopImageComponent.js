@@ -7,7 +7,7 @@ function TopImageComponent(props) {
   const styles = {
     ods: {
       background: 'URL("../.././image/image1.jpg") 50% 0 no-repeat fixed',
-      height: "400px",
+      height: props.height,
     },
   };
 
@@ -16,7 +16,7 @@ function TopImageComponent(props) {
       <div className="top-img-block"></div>
       <div className="top-img-title">{props.title}</div>
       <div className="top-img-content">
-        <h2>unique handmade <br />leather</h2>
+      {props.content}
       </div>
     </div>
   );
