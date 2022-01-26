@@ -57,3 +57,24 @@ input.error {
   background-size: contain;
   background-attachment: fixed;
 }
+
+
+/* Common */
+
+.app-content{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.app-content-title{
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 3% 0px;
+}
+
+.app-content-title.sub{
+  font-size: 2.2rem;
+}
+
+.empty-block{
+  height: 100px;
+}

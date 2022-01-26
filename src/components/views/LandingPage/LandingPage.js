@@ -8,9 +8,7 @@ function LandingPage() {
       <div className="img-container">
         <TopImageComponent
           height="680px"
-          backgroundImg={
-            "https://icampus.dongguk.edu/data/file/dongguk4_1/thumb-3529417547_puYVS1Z5_c11efdfccfff9ffe841dc84de5b54a7303ece2e2_800x450.jpg"
-          }
+          backgroundImg={"../.././image/image1.jpg"}
           title={<h1>yh workshop</h1>}
           content={
             <h2>
@@ -22,9 +20,9 @@ function LandingPage() {
       <div className="landing-container-middle">
         <div className="landing-box-item">
           <div className="landing-item-content-box">
-            <div className="landing-content-title">공방소개</div>
-            <div className="landing-content-title sub">나만의 가방 만들기</div>
-            <div className="landing-content">
+            <div className="app-content-title">공방소개</div>
+            <div className="app-content-title sub">나만의 가방 만들기</div>
+            <div className="app-content">
               <p>
                 새딜 스티치의 손맛을 살려 한 땀 한 땀 만들어진 나만의 가방.{" "}
                 <br />
@@ -49,15 +47,15 @@ function LandingPage() {
             </div>
           </div>
         </div>
-        
+
         <div className="landing-box-item"></div>
 
         <div className="landing-box-item">
           <div className="landing-item-content-box">
             <div className="landing-item-content-box sub">
-              <div className="landing-content-title">가죽공예</div>
-              <div className="landing-content-title sub">Classes</div>
-              <div className="landing-content">
+              <div className="app-content-title">가죽공예</div>
+              <div className="app-content-title sub">Classes</div>
+              <div className="app-content">
                 가죽공예 일일체험, 커플체험등 단기간에 가죽공예를 경험하고
                 싶으신 분들부터, 오랜기간 함께 가죽공예를 배워나가며 공방을
                 이용하고 싶으신 분들까지.
@@ -67,8 +65,8 @@ function LandingPage() {
               </div>
             </div>
             <div className="landing-item-content-box sub">
-              <div className="landing-content-title sub">corporate</div>
-              <div className="landing-content">
+              <div className="app-content-title sub">corporate</div>
+              <div className="app-content">
                 YH workshop은 다양한 사이즈의 기업 워크숍 및 출장강의를
                 진행하고있습니다.
                 <br />
@@ -88,9 +86,7 @@ function LandingPage() {
       <div className="img-container">
         <TopImageComponent
           height="480px"
-          backgroundImg={
-            "https://icampus.dongguk.edu/data/file/dongguk4_1/thumb-3529417547_puYVS1Z5_c11efdfccfff9ffe841dc84de5b54a7303ece2e2_800x450.jpg"
-          }
+          backgroundImg={"../.././image/back-01.jpg"}
           title=""
           content=""
         />
@@ -101,8 +97,8 @@ function LandingPage() {
           <div className="landing-item-content-box">
             <div className="landing-item-content-flex-box">
               <div>
-                <div className="landing-content-title sub">location</div>
-                <div className="landing-content">
+                <div className="app-content-title sub">location</div>
+                <div className="app-content">
                   서울시 강남구 강남대로 146길 28
                   <br />
                   논현아파트 상가 2층
@@ -118,8 +114,8 @@ function LandingPage() {
                 </div>
               </div>
               <div>
-                <div className="landing-content-title sub">contact</div>
-                <div className="landing-content">
+                <div className="app-content-title sub">contact</div>
+                <div className="app-content">
                   info@yhworkshop.com
                   <br />
                   katalk: @yhworkshop
@@ -131,8 +127,8 @@ function LandingPage() {
                 </div>
               </div>
               <div>
-                <div className="landing-content-title sub">hours</div>
-                <div className="landing-content">
+                <div className="app-content-title sub">hours</div>
+                <div className="app-content">
                   Mon - Fri, 11 am - 5:30 pm <br />
                   Sat - Sun, 2:30 pm - 5:30 pm <br />
                   <br />
@@ -147,8 +143,8 @@ function LandingPage() {
         <div className="landing-box-item">
           <div className="landing-item-content-box">
             <div className="landing-item-content-box sub">
-              <div className="landing-content-title sub">map</div>
-              <div className="landing-content">
+              <div className="app-content-title sub">map</div>
+              <div className="app-content">
                 YH workshop은
                 <br />
                 강남구 논현동 22번지 논현아파트 2층에 위치하고 있습니다.
@@ -160,7 +156,7 @@ function LandingPage() {
               </div>
             </div>
             <div className="landing-item-content-box sub">
-              <div className="landing-content-map"></div>
+              <div className="app-content-map"></div>
             </div>
           </div>
         </div>

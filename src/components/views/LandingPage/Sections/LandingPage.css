@@ -102,23 +102,4 @@
     background-color: #cdcdcd;
 }
 
-/* Common */
-
-.landing-content{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
-.landing-content-title{
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 3% 0px;
-}
-
-.landing-content-title.sub{
-    font-size: 2.2rem;
-}
-
-.empty-block{
-    height: 100px;
-}
 
