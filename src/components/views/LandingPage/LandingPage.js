@@ -2,6 +2,8 @@ import React from "react";
 import { FaCode } from "react-icons/fa";
 import "./Sections/LandingPage.css";
 import TopImageComponent from "../../items/TopImageComponent/TopImageComponent";
+import RouterButton from "../../items/RouterButtonComponent/RouterButton";
+import Map from "../../items/MapComponent/Map"
 function LandingPage() {
   return (
     <>
@@ -17,6 +19,7 @@ function LandingPage() {
           }
         />
       </div>
+
       <div className="landing-container-middle">
         <div className="landing-box-item">
           <div className="landing-item-content-box">
@@ -44,6 +47,9 @@ function LandingPage() {
                 <br />
                 교통 편리한 강남의 중심 논현동에서 함께하실 여러분을 찾습니다.
               </p>
+            </div>
+            <div className="app-content-title app-align-center">
+              <RouterButton name="공 방 사 진" routeAddress="/gallery2" />
             </div>
           </div>
         </div>
@@ -79,6 +85,9 @@ function LandingPage() {
                 <br />
                 katalk: @yhworkshop
               </div>
+            </div>
+            <div className="app-content-title app-align-center">
+              <RouterButton name="상 세 보 기" routeAddress="/class" />
             </div>
           </div>
         </div>
@@ -156,7 +165,11 @@ function LandingPage() {
               </div>
             </div>
             <div className="landing-item-content-box sub">
-              <div className="app-content-map"></div>
+              <div className="app-content-map">
+              
+              <Map/>
+
+              </div>
             </div>
           </div>
         </div>

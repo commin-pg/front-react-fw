@@ -78,3 +78,14 @@ input.error {
 .empty-block{
   height: 100px;
 }
+
+.app-align-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-content-map{
+  height: 100%;
+  width: 100%;
+}
