@@ -6,7 +6,7 @@ function TopImageComponent(props) {
 
   const styles = {
     ods: {
-      background: 'URL('+props.backgroundImg+') 50% 0 no-repeat fixed',
+      background: 'center / cover URL('+props.backgroundImg+') no-repeat fixed',
       height: props.height,
     },
   };
