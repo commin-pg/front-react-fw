@@ -1,0 +1,30 @@
+.contact-container{
+    padding: 3%;
+}
+
+.contact-container .contact-box-flex{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: stretch;
+    justify-items: center;
+}
+
+.app-content-title{
+    padding-bottom: 10px;
+}
+
+.contact-container .contact-box-flex .contact-flex-item:nth-child(1){
+    flex-basis: 500px;
+    flex-grow: 3;
+    flex-shrink: 0;
+    padding-right: 100px;
+}
+/* .contact-container .contact-box-flex .contact-flex-item:nth-child(2){
+    flex-basis: 100px;
+    flex-shrink: 1px;
+} */
+.contact-container .contact-box-flex .contact-flex-item:nth-child(2){
+    flex-grow: 1;
+    flex-basis: 200px;
+    flex-shrink: 0;
+}

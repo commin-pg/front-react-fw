@@ -1,16 +1,20 @@
 import React from "react";
 import { Menu } from "antd";
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
-
+import { MailOutlined } from "@ant-design/icons/lib/icons";
 function LeftMenu(props) {
   return (
     <Menu mode={props.mode}>
-      <Menu.Item key="home">
+      <Menu.Item key="home" icon={<MailOutlined/>}>
         <a href="/">Home</a>
       </Menu.Item>
-      <Menu.Item key="class">
+      <Menu.Item key="class" icon={<MailOutlined/>}>
         <a href="/class">classes</a>
+      </Menu.Item>
+      <Menu.Item key="gallery" icon={<MailOutlined></MailOutlined>}>
+        <a href="/gallery2">gallery</a>
+      </Menu.Item>
+      <Menu.Item key="contact" icon={<MailOutlined/>}>
+        <a href="/contact" >contact</a>
       </Menu.Item>
     </Menu>
   );

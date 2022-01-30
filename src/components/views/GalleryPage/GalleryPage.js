@@ -2,11 +2,15 @@ import { Button, Row, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 import { IMAGE_API_ACCESS_KEY, IMAGE_API_BASE_URL } from "../../Config";
 import ImageGrid from "../../ImageGridComponent/ImageGrid";
+import ImageSlider from "../../ImageSliderComponent/ImageSlider";
 import TopImageComponent from "../../items/TopImageComponent/TopImageComponent";
 import "./Sections/GalleryPage.css";
 
+
+
 function GalleryPage(props) {
   const [Images, setImages] = useState([]);
+  const [TempImages, setTempImages] = useState([]);
   const [CurrentPage, setCurrentPage] = useState(1);
   const [MainImage, setMainImage] = useState(null);
   const [Lodding, setLodding] = useState(false);
@@ -19,6 +23,14 @@ function GalleryPage(props) {
         console.log(response);
         setCurrentPage(CurrentPage + 1);
         if (!MainImage) setMainImage(response[0].urls.regular);
+
+
+        let tmps = response.map(img => {
+          return img.urls.regular
+        })
+        setTempImages([...TempImages, ...tmps]);
+
+        console.log(tmps)
         setImages([...Images, ...response]);
       })
       .finally(
@@ -44,6 +56,12 @@ function GalleryPage(props) {
         {TopImageComponent && (
           <TopImageComponent height="470px" backgroundImg={MainImage} />
         )}
+      </div>
+      <div>
+          <ImageSlider
+            images={TempImages}
+          ></ImageSlider>
+
       </div>
 
       <div className="gallery-container">

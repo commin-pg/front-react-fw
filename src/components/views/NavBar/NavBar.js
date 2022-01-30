@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import LeftMenu from "./Sections/LeftMenu";
 import RightMenu from "./Sections/RightMenu";
-import { Drawer, Button, Icon } from "antd";
+import { Drawer, Button } from "antd";
 import "./Sections/Navbar.css";
+import {  UnorderedListOutlined } from "@ant-design/icons/lib/icons";
+
+
 
 function NavBar() {
   const [visible, setVisible] = useState(false);
@@ -21,23 +24,25 @@ function NavBar() {
       style={{ position: "fixed", zIndex: 5, width: "100%" }}
     >
       <div className="menu__container">
+
+      <div className="menu__logo">
+          <a href="/">Logo</a>
+        </div>
         <div className="menu_left">
           <LeftMenu mode="horizontal" />
         </div>
 
-        <div className="menu__logo">
-          <a href="/">Logo</a>
-        </div>
 
-        <div className="menu_rigth">
+
+        {/* <div className="menu_rigth">
           <RightMenu mode="horizontal" />
-        </div>
+        </div> */}
         <Button
           className="menu__mobile-button"
-          type="primary"
           onClick={showDrawer}
         >
-          <Icon type="align-right" />
+          {/* <Icon type="align-right" /> */}
+          <UnorderedListOutlined />
         </Button>
         <Drawer
           title="Basic Drawer"

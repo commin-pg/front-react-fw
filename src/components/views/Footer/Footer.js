@@ -1,5 +1,4 @@
 import React from 'react'
-import {Icon} from 'antd';
 
 function Footer() {
     return (
@@ -9,7 +8,9 @@ function Footer() {
             justifyContent: 'center', fontSize:'1rem',
             color:'#fafafa',backgroundColor:'#1f1f1f'
         }}>
-           <p> Happy Coding  <Icon type="smile" /></p>
+           <p> Happy Coding  
+               {/* <Icon type="smile" /> */}
+           </p>
         </div>
     )
 }

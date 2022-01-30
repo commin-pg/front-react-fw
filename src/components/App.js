@@ -9,6 +9,7 @@ import Footer from "./views/Footer/Footer";
 import ClassPage from "./views/ClassPage/ClassPage";
 import ContactPage from "./views/ContactPage/ContactPage";
 import GalleryPage from "./views/GalleryPage/GalleryPage";
+import RegisterPage from "./views/RegisterPage/RegisterPage";
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/class" component={Auth(ClassPage, false)} />
           <Route exact path="/gallery2" component={Auth(GalleryPage, false)} />
           <Route exact path="/contact" component={Auth(ContactPage, false)} />
+          <Route exact path="/register" component={Auth(RegisterPage, false)} />
         </Switch>
       </div>
       <Footer />
