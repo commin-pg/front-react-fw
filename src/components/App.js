@@ -1,11 +1,10 @@
-import React, { Suspense } from 'react';
+import React, { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 // pages for this product
 import LandingPage from "./views/LandingPage/LandingPage.js";
-import LoginPage from "./views/LoginPage/LoginPage.js";
-import RegisterPage from "./views/RegisterPage/RegisterPage.js";
-import NavBar from "./views/NavBar/NavBar";
-import Footer from "./views/Footer/Footer"
+import NotFoundPage from "./views/ErrorPage/NotFoundPage.js";
+import JobIntroPage from "./views/JobIntroPage/JobIntroPage.js";
+import IntroPage from "./views/IntroPage/IntroPage.js";
 
 //null   Anyone Can go inside
 //true   only logged in user can go inside
@@ -13,16 +12,18 @@ import Footer from "./views/Footer/Footer"
 
 function App() {
   return (
-    <Suspense fallback={(<div>Loading...</div>)}>
-      <NavBar />
-      <div style={{ paddingTop: '69px', minHeight: 'calc(100vh - 80px)' }}>
+    <Suspense fallback={<div>Loading...</div>}>
+      {/* <NavBar /> */}
+      <div style={{ minHeight: "calc(100vh - 80px)" }}>
         <Switch>
           <Route exact path="/" component={LandingPage} />
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/intro" component={IntroPage} />
+          <Route exact path="/intro/job" component={JobIntroPage} />
+          <Route path="*" component={NotFoundPage} />
         </Switch>
       </div>
-      <Footer />
+
+      {/* <Footer /> */}
     </Suspense>
   );
 }
