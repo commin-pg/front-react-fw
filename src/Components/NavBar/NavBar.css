@@ -1,0 +1,7 @@
+.menu{
+    position: absolute;
+    width: 100%;
+    padding: 13px;
+    border-bottom: 1px solid #fafafa;
+    box-shadow: 0.5px 0.2px 2px 1px gray;
+}
