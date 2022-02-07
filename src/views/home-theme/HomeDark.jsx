@@ -1,7 +1,7 @@
 import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import Index from "../../components/About/Index";
 import Hero from "../../components/Hero/Hero";
-
 
 const menuItem = [
   { icon: "fa-home", menuName: "Home" },
@@ -46,8 +46,21 @@ const HomeDark = () => {
           </TabPanel>
           {/* Hero Content Ends */}
 
-          </div>
-
+          <TabPanel className="about">
+            <div
+              data-aos="fade-up"
+              data-aos-duration="1200"
+            >
+                <div className="title-section text-left text-sm-center">
+                    <h1>
+                    ABOUT <span>ME</span>
+                    </h1>
+                    <span className="title-bg">Resume</span>
+                </div>
+                <Index/>
+            </div>
+          </TabPanel>
+        </div>
       </Tabs>
     </div>
   );

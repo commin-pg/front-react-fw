@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import Modal from "react-modal";
+import Index from "../About/Index";
 
 function Hero() {
   const heroContent = {
     heroImage: "img/hero/back-03.jpg",
-    heroMobileImage: "img-mobile",
-    heroTitleName: "steve milner",
-    heroDesignation: "web designer",
-    heroDescriptions: `I'm a Tunisian based web designer & front‑end developer focused on
-        crafting clean & user‑friendly experiences, I am passionate about
-        building excellent software that improves the lives of those
-        around me.`,
+    heroMobileImage: "back-03",
+    heroTitleName: "Commin",
+    heroDesignation: "web developer",
+    heroDescriptions: `저는 웹 개발자입니다. 백앤드와 프론트앤드를 개발합니다.`,
     heroBtn: "more about me",
   };
+
+  const [isOpen, setisOpen] = useState(false);
+  function toggleModalOpen() {
+    setisOpen(!isOpen);
+  }
+
   return (
     <>
       <div className="row home-details-container align-items-center">
@@ -23,7 +28,47 @@ function Hero() {
             })`,
           }}
         ></div>
+
+        <div className="col-12 col-lg-8 offset-lg-4 home-details  text-center text-lg-start">
+          <div>
+            <img
+              src={`img/hero/${heroContent.heroMobileImage}.jpg`}
+              className="img-fluid main-img-mobile d-sm-block d-lg-none"
+              alt="hero man"
+            />
+            <h1 className="text-uppercase poppins-font">
+              I'm {heroContent.heroTitleName}.
+              <span>{heroContent.heroDesignation}</span>
+            </h1>
+            <p className="open-sans-font">{heroContent.heroDescriptions}</p>
+            <button className="button" onClick={toggleModalOpen}>
+              <span className="button-text">{heroContent.heroBtn}</span>
+              <span className="button-icon fa fa-arrow-right"></span>
+            </button>
+          </div>
+        </div>
       </div>
+
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={toggleModalOpen}
+        contentLabel="My Profile"
+        className="custom-modal dark hero"
+        overlayClassName="custom-overlay dark"
+        closeTimeoutMS={500}
+      >
+        <div className="box_inner about">
+          <div data-aos="fade-up" data-aos-duration="1200">
+              <div className="title-section text-left text-sm-center">
+                    <h1 >
+                        ABOUT <span>ME</span>
+                    </h1>
+                    <span className="title-bg"> Resume</span>
+              </div>
+            <Index />
+          </div>
+        </div>
+      </Modal>
     </>
   );
 }
