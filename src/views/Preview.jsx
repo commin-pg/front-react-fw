@@ -6,7 +6,7 @@ function Preview() {
     {
       img: "back-01",
       title: "Dark Demo (Professional Portfolio)",
-      routerPath: "/home-dark",
+      routerPath: "/home",
       delayAnimation: "50",
     },
     {
@@ -70,7 +70,7 @@ function Preview() {
       <footer>
           <div className="go_purchase">
               <h6 data-aos="fade-up" data-aos-duration="1200">
-                  You are at the right step now
+                  아아아아아아아아아아
               </h6>
               <h3 data-aos="fade-up" data-aos-duration="1200" data-aos-delay="100">
                 <span className="theme-color">React</span> &amp;
