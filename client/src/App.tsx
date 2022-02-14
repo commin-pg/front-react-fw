@@ -18,7 +18,10 @@ function App() {
 
   const [Result, setResult] = useState("");
 
-  const onSubmit = async (form: { name: string; age: number }) => {
+  const onSubmit = async (form: {
+    name: string | undefined;
+    age: number | undefined;
+  }) => {
     console.log(form);
     const response = await fetch("/api/insert", {
       method: "POST",
@@ -35,6 +38,8 @@ function App() {
             age: form.age,
             datas: [],
           });
+
+          onSelectAll();
         } else {
           setRequest({
             name: undefined,
@@ -64,24 +69,42 @@ function App() {
       });
   };
 
+  const onDeleteAll = async () => {
+    const response = await fetch("/api/delete", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+        setRequest({
+          name: undefined,
+          age: undefined,
+          datas: undefined,
+        });
+      });
+  };
+
   return (
     <div className="App">
       <MyForm onSubmit={onSubmit} />
       <button onClick={onSelectAll}> 조회 </button>
-      <p>
-        <span>이름 : {Request && Request.name}</span>
-        <span>나이 : {Request && Request.age}</span>
-      </p>
+      <button onClick={onDeleteAll}> 전체삭제 </button>
+    
       <p>{Result}</p>
       <div>
-        {Request &&
-          Request.datas &&
-          Request.datas.map((value, i) => (
-            <p key={i}>
-              <span>{value ? value.name : "NO"}</span> :
-              <span>{value ? value.age : "NO"}</span>
-            </p>
-          ))}
+        <ul>
+          {Request &&
+            Request.datas &&
+            Request.datas.map((value, i) => (
+              <li key={i}>
+                <span>{value ? value.name : "NO"}</span> :
+                <span>{value ? value.age : "NO"}</span>
+              </li>
+            ))}
+        </ul>
       </div>
     </div>
   );

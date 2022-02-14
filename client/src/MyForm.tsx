@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 type MyFormProps = {
-  onSubmit: (form: { name: string; age: number }) => void;
+  onSubmit: (form: {
+    name: string | undefined;
+    age: number | undefined;
+  }) => void;
 };
 function MyForm({ onSubmit }: MyFormProps) {
   const [Form, setForm] = useState({
-    name: "",
-    age: 0,
+    name: undefined,
+    age: undefined,
   });
 
   const { name, age } = Form;
@@ -25,8 +28,8 @@ function MyForm({ onSubmit }: MyFormProps) {
     onSubmit(Form);
 
     setForm({
-      name: "",
-      age: 0,
+      name: undefined,
+      age: undefined,
     });
   };
 
