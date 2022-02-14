@@ -33,20 +33,27 @@ function App() {
       .then((res) => res.json())
       .then((json) => {
         if (json.code === 200) {
-          setRequest({
-            name: form.name,
-            age: form.age,
-            datas: [],
-          });
-
-          onSelectAll();
-        } else {
-          setRequest({
-            name: undefined,
-            age: undefined,
-            datas: undefined,
-          });
+          if (Request && Request.datas) {
+            setRequest({
+              name: form.name,
+              age: form.age,
+              datas: [...Request.datas, { name: form.name, age: form.age }],
+            });
+          } else {
+            setRequest({
+              name: form.name,
+              age: form.age,
+              datas: [{ name: form.name, age: form.age }],
+            });
+          }
         }
+        
+        setRequest({
+          name: undefined,
+          age: undefined,
+          datas: undefined,
+        });
+        
         setResult(json.message);
       });
   };
@@ -92,7 +99,7 @@ function App() {
       <MyForm onSubmit={onSubmit} />
       <button onClick={onSelectAll}> 조회 </button>
       <button onClick={onDeleteAll}> 전체삭제 </button>
-    
+
       <p>{Result}</p>
       <div>
         <ul>

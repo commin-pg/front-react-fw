@@ -29,6 +29,7 @@ app.post("/api/insert", (req, res) => {
 
   connection.query(sql, (err, rows) => {
     if (err) {
+      console.log(err)
       baseRes.message = "Connection Fail";
       baseRes.code = 501;
       res.send(baseRes);
@@ -44,6 +45,7 @@ app.get("/api/delete", (req, res) => {
   var sql = `delete from table1`;
   connection.query(sql, (err, rows) => {
     if (err) {
+      console.log(err)
       baseRes.message = "Connection Fail";
       baseRes.code = 501;
       res.send(baseRes);
@@ -59,6 +61,7 @@ app.get("/api/selectAll", (req, res) => {
   var sql = `select * from table1`;
   connection.query(sql, (err, rows) => {
     if (err) {
+      console.log(err)
       baseRes.message = "Connection Fail";
       baseRes.code = 501;
       res.send(baseRes);
