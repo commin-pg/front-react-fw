@@ -97,11 +97,12 @@ function App() {
   return (
     <div className="App">
       <MyForm onSubmit={onSubmit} />
-      <button onClick={onSelectAll}> 조회 </button>
+      <button onClick={onSelectAll}> 조회 2</button>
       <button onClick={onDeleteAll}> 전체삭제 </button>
 
       <p>{Result}</p>
       <div>
+        <h1>React App</h1>
         <ul>
           {Request &&
             Request.datas &&

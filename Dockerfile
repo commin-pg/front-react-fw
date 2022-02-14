@@ -1,17 +1,15 @@
-FROM node:14.15.2
-# WORKDIR /app
-# COPY . .
-# RUN yarn install
+FROM node:14.15.1
 
+RUN mkdir /app
+WORKDIR /app
+ENV PATH /app/node_modules/.bin:$PATH
 
-# WORKDIR /app/client
-# RUN npm install --silent
-# RUN npm install react-script@3.4.1 -g --silent
+COPY package.json /app/package.json
 
+RUN npm install --no-cache
 
-# WORKDIR /app/server
-# RUN npm install --silent
-# EXPOSE 3000
+# 서버 소스 복사
+COPY ./server /app
 
-# WORKDIR /app
-# CMD ["yarn","dev"]
+# 실행 명령어
+CMD ["npm", "run", "server"]
