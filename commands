@@ -1,0 +1,6 @@
+-- init
+1. docker pull mysql
+2. docker-compose up -d
+
+-- mysql
+docker exec -it <container id> /bin/bash
