@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.4'
 
 services:
   mysql:
@@ -27,20 +27,82 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./client/build:/usr/share/nginx/html
  
-  server:
+  server-a:
     build: # Dockerfile 빌드
       context: . # Dockerfile 빌드 경로
-    container_name: server # 컨테이너 명
+    container_name: server-A # 컨테이너 명
     restart: "on-failure"
-    expose:
-      - 5000 # 도커 내부적 포트
-    # ports:
-    #   - 5001:5000
+    # expose:
+    #   - 5000 # 도커 내부적 포트
+    #   - 5001
+    ports:
+      - 5000:5000
     volumes: # 볼륨 설정
       - './server:/app'
       - '/app/node_modules'
     environment: # 환경변수 설정
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
+      - CONTAINER_NAME=serverA
     stdin_open: true
     tty: true
+
+  server-b:
+    build: # Dockerfile 빌드
+      context: . # Dockerfile 빌드 경로
+    container_name: server-B # 컨테이너 명
+    restart: "on-failure"
+    # expose:
+    #   - 5000 # 도커 내부적 포트
+    #   - 5001
+    ports:
+      - 5001:5000
+    volumes: # 볼륨 설정
+      - './server:/app'
+      - '/app/node_modules'
+    environment: # 환경변수 설정
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - CONTAINER_NAME=serverB
+    stdin_open: true
+    tty: true
+
+  server-c:
+    build: # Dockerfile 빌드
+      context: . # Dockerfile 빌드 경로
+    container_name: server-C # 컨테이너 명
+    restart: "on-failure"
+    # expose:
+    #   - 5000 # 도커 내부적 포트
+    #   - 5001
+    ports:
+      - 5002:5000
+    volumes: # 볼륨 설정
+      - './server:/app'
+      - '/app/node_modules'
+    environment: # 환경변수 설정
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - CONTAINER_NAME=serverC
+    stdin_open: true
+    tty: true
+
+  # server-d:
+  #   build: # Dockerfile 빌드
+  #     context: . # Dockerfile 빌드 경로
+  #   container_name: server-D # 컨테이너 명
+  #   restart: "on-failure"
+  #   # expose:
+  #   #   - 5000 # 도커 내부적 포트
+  #   #   - 5001
+  #   ports:
+  #     - 5003:5000
+  #   volumes: # 볼륨 설정
+  #     - './server:/app'
+  #     - '/app/node_modules'
+  #   environment: # 환경변수 설정
+  #     - NODE_ENV=development
+  #     - CHOKIDAR_USEPOLLING=true
+  #     - CONTAINER_NAME=serverD
+  #   stdin_open: true
+  #   tty: true

@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const mysql = require("mysql");
 const cors = require("cors");
 
+const crypto = require("crypto");
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -29,7 +31,7 @@ app.post("/api/insert", (req, res) => {
 
   connection.query(sql, (err, rows) => {
     if (err) {
-      console.log(err)
+      console.log(err);
       baseRes.message = "Connection Fail";
       baseRes.code = 501;
       res.send(baseRes);
@@ -41,11 +43,30 @@ app.post("/api/insert", (req, res) => {
   });
 });
 
+app.get("/api/test/:str", (req, res) => {
+  console.log(`${process.env["CONTAINER_NAME"]} ======> ${req}`);
+  crypto.randomBytes(64, (err, buf) => {
+    crypto.pbkdf2(
+      "str",
+      buf.toString("base64"),
+      100000,
+      64,
+      "sha512",
+      (err, key) => {
+        let res_obj = {};
+        res_obj.digest = key.toString("base64");
+        res_obj.container_name = process.env["CONTAINER_NAME"];
+        res.send(res_obj);
+      }
+    );
+  });
+});
+
 app.get("/api/delete", (req, res) => {
   var sql = `delete from table1`;
   connection.query(sql, (err, rows) => {
     if (err) {
-      console.log(err)
+      console.log(err);
       baseRes.message = "Connection Fail";
       baseRes.code = 501;
       res.send(baseRes);
@@ -61,7 +82,7 @@ app.get("/api/selectAll", (req, res) => {
   var sql = `select * from table1`;
   connection.query(sql, (err, rows) => {
     if (err) {
-      console.log(err)
+      console.log(err);
       baseRes.message = "Connection Fail";
       baseRes.code = 501;
       res.send(baseRes);

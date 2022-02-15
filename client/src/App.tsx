@@ -47,13 +47,13 @@ function App() {
             });
           }
         }
-        
+
         setRequest({
           name: undefined,
           age: undefined,
           datas: undefined,
         });
-        
+
         setResult(json.message);
       });
   };
@@ -94,11 +94,42 @@ function App() {
       });
   };
 
+  const onTestSpeed = async () => {
+    let count = 0;
+    let startTime = Date.now() / 1000;
+
+    for (let i = 0; i < 100; i++) {
+      setTimeout(() => {
+        fetch("/api/test/abcde", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => {
+            count++;
+            return res.json();
+          })
+          .then((json) => {
+            if (count === 100) {
+              setResult(
+                `걸린 시간 : ${Date.now() / 1000 - startTime} 서버 : ${
+                  json.container_name
+                }`
+              );
+            }
+            console.log(i, json);
+          });
+      }, i * 5);
+    }
+  };
+
   return (
     <div className="App">
       <MyForm onSubmit={onSubmit} />
-      <button onClick={onSelectAll}> 조회 2</button>
+      <button onClick={onSelectAll}> 조회 3</button>
       <button onClick={onDeleteAll}> 전체삭제 </button>
+      <button onClick={onTestSpeed}> 속도 테스트 </button>
 
       <p>{Result}</p>
       <div>
