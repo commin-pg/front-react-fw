@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import MyForm from "./MyForm";
 
@@ -14,9 +14,22 @@ function App() {
     datas: initDataState[] | undefined;
   }
 
+  useEffect(() => {
+    const response = fetch("/api/getServerName", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => setServerName(json.serverName));
+  }, []);
+
   const [Request, setRequest] = useState<initRequestState | null>(null);
 
   const [Result, setResult] = useState("");
+
+  const [ServerName, setServerName] = useState("");
 
   const onSubmit = async (form: {
     name: string | undefined;
@@ -133,7 +146,15 @@ function App() {
 
       <p>{Result}</p>
       <div>
-        <h1>React App</h1>
+        <h1>
+          {ServerName && ServerName === "SERVER_BLUE" ? (
+            <b style={{ color: "blue" }}>{ServerName}</b>
+          ) : ServerName && ServerName === "SERVER_GREEN" ? (
+            <b style={{ color: "green" }}>{ServerName}</b>
+          ) : (
+            <b style={{ color: "red" }}>{ServerName}</b>
+          )}
+        </h1>
         <ul>
           {Request &&
             Request.datas &&

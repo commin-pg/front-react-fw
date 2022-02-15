@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  server-green:
+    build: # Dockerfile 빌드
+      context: . # Dockerfile 빌드 경로
+    container_name: server-Green # 컨테이너 명
+    restart: "on-failure"
+    # expose:
+    #   - 5000 # 도커 내부적 포트
+    #   - 5001
+    ports:
+      - 5001:5000
+    volumes: # 볼륨 설정
+      - './server:/app'
+      - '/app/node_modules'
+    environment: # 환경변수 설정
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - CONTAINER_NAME=SERVER_GREEN
+    stdin_open: true
+    tty: true

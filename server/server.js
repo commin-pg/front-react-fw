@@ -62,6 +62,12 @@ app.get("/api/test/:str", (req, res) => {
   });
 });
 
+app.get("/api/getServerName", (req, res) => {
+  res_obj = {};
+  res_obj.serverName = process.env["CONTAINER_NAME"];
+  res.send(res_obj);
+});
+
 app.get("/api/delete", (req, res) => {
   var sql = `delete from table1`;
   connection.query(sql, (err, rows) => {

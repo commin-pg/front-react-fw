@@ -3,3 +3,11 @@
 
 -- mysql
 docker exec -it <container id> /bin/bash
+
+
+-- docker
+ docker-compose -p web-nginx-react -f docker-compose.yml ps
+ docker-compose -p node-server-blue -f docker-compose.green.yml ps
+ docker-compose -p node-server-blue -f docker-compose.blue.yml ps
+
+ 
