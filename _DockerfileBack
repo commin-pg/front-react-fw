@@ -1,7 +1,12 @@
 FROM node:14.15.2
 WORKDIR /app
-COPY . .
+COPY package.json /app/
+COPY package-lock.json /app/
 RUN yarn install
+
+
+COPY public/ /app/
+COPY src/ /app/
 
 
 WORKDIR /app/client
