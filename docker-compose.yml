@@ -6,7 +6,7 @@ services:
     container_name: web # 컨테이너 명
     restart: "on-failure" # 구동 실패 시 재시작
     ports:
-      - 80:80
+      - 2022:22000
     volumes: # 볼륨 설정
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./client/build:/usr/share/nginx/html
