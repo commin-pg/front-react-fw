@@ -1,50 +1,27 @@
-import axios from 'axios';
-import {
-    LOGIN_USER,
-    REGISTER_USER,
-    AUTH_USER,
-    LOGOUT_USER,
-} from './types';
-import { USER_SERVER } from '../components/Config.js';
+import jwtService from "../services/jwt.service";
 
-export function registerUser(dataToSubmit) {
-    const request = axios.post(`${USER_SERVER}/join`, dataToSubmit)
-        .then(response => response.data)
-        .then(result => result.data)
+export const SET_USER_DATA = "USER_SET_DATA";
+export const REMOVE_USER_DATA = "USER_REMOVE_DATA";
+export const USER_LOGGED_OUT = "USER_LOGGED_OUT";
 
-    return {
-        type: REGISTER_USER,
-        payload: request
-    }
-}
-
-export function loginUser(dataToSubmit) {
-    const request = axios.post(`${USER_SERVER}/login`, dataToSubmit)
-        .then(response => response.data)
-        .then(result => result.data)
-
-    return {
-        type: LOGIN_USER,
-        payload: request
-    }
-}
-
-export function auth() {
-    const request = axios.get(`${USER_SERVER}/auth`)
-        .then(response => response.data);
-
-    return {
-        type: AUTH_USER,
-        payload: request
-    }
+export function setUserData(user) {
+    return (dispatch) => {
+        dispatch({
+            type: SET_USER_DATA,
+            data: user,
+        });
+    };
 }
 
 export function logoutUser() {
-    const request = axios.get(`${USER_SERVER}/logout`)
-        .then(response => response.data);
+    return (dispatch) => {
+        jwtService.logout();
+        // history.push({
+        //   pathname: "/session/signin"
+        // });
 
-    return {
-        type: LOGOUT_USER,
-        payload: request
-    }
+        dispatch({
+            type: USER_LOGGED_OUT,
+        });
+    };
 }
