@@ -186,7 +186,6 @@ function LoginPage(props) {
 }
 
 const mapStateToProps = (state) => ({
-  
   loginUser: PropTypes.func.isRequired,
   user: state.user,
 });
