@@ -13,12 +13,13 @@ export function setUserData(user) {
     };
 }
 
-export function logoutUser() {
+export function logoutUser(history) {
     return (dispatch) => {
         jwtService.logout();
-        // history.push({
-        //   pathname: "/session/signin"
-        // });
+
+        history.push({
+            pathname: "/login"
+        });
 
         dispatch({
             type: USER_LOGGED_OUT,

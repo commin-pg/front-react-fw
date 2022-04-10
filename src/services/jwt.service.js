@@ -21,7 +21,7 @@ class JwtService {
         if (accessToken) {
             localStorage.setItem("accessToken", accessToken);
             localStorage.setItem("refreshToken", refreshToken);
-            axios.defaults.headers.common["Authorization"] = "Bearer" + accessToken;
+            axios.defaults.headers.common["Authorization"] = "Bearer " + accessToken;
             axios.defaults.headers.common["refreshToken"] = refreshToken;
         } else {
             localStorage.removeItem("accessToken");

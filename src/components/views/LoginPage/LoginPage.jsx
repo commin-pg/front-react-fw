@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { loginUser } from "../../../_actions/login_actions";
 import PropTypes from "prop-types";
 import { Formik } from "formik";
-import { useFormik } from 'formik';
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Form, Icon, Input, Button, Checkbox, Typography } from "antd";
 import { connect, useDispatch } from "react-redux";
@@ -25,49 +25,32 @@ function LoginPage(props) {
     ? localStorage.getItem("rememberMe")
     : "";
 
-  const state = {
-    userId: "",
-    password: "",
-  }
-
-  // const handleChange = (event) => {
-  //   event.persist();
-  //   this.setState({ [event.target.name]: event.target.value });
-  // };
-
-  // const handleSubmit = (values, { isSubmitting }) => {
-  //   let dataToSubmit = {
-  //     userId: values.email,
-  //     password: values.password,
-  //   };
-  //   this.props.loginUser(dataToSubmit);
-  // };
-
   return (
     <Formik
       initialValues={{
-        userId: initialUserId,
+        userId: "",
         password: "",
       }}
       validationSchema={Yup.object().shape({
-        email: Yup.string()
+        userId: Yup.string()
           .email("Email is invalid")
           .required("Email is required"),
         password: Yup.string()
           .min(6, "Password must be at least 6 characters")
           .required("Password is required"),
       })}
-      onSubmit={(values, { isSubmitting }) => {
-        let dataToSubmit = {
-          userId: values.email,
-          password: values.password,
-        };
-        this.props.loginUser(dataToSubmit);
-      }}
-      onChange={(event) => {
-        console.log(event)
-        event.persist();
-        this.setState({ [event.target.name]: event.target.value });
+      onSubmit={(values, { setSubmitting }) => {
+        // let dataToSubmit = {
+        //   userId: values.userId,
+        //   password: values.password,
+        // };
+        setTimeout(async () => {
+          await dispatch(loginUser({ userId: values.userId, password: values.password }));
+          // console.log(result)
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+        }, 400)
+
       }}
     >
       {(props) => {
@@ -80,32 +63,38 @@ function LoginPage(props) {
           handleChange,
           handleBlur,
           handleSubmit,
-          handleReset,
         } = props;
         return (
+          // <>
+          //   <Form>
+          //     <input type="email" name="userId" onChange={handleChange} value={values.userId} />
+          //     <input type="password" name="password" onChange={handleChange} value={values.password} />
+          //   </Form>
+          // </>
+
           <div className="app">
             <Title level={2}>Log In</Title>
             <form onSubmit={handleSubmit} style={{ width: "350px" }}>
               <Form.Item required>
                 <Input
-                  id="email"
+                  id="userId"
                   prefix={
                     <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
                   }
                   placeholder="Enter your email"
                   type="email"
                   name="userId"
-                  value={values.email}
-                  // onChange={handleChange}
+                  value={values.userId}
+                  onChange={handleChange}
                   onBlur={handleBlur}
                   className={
-                    errors.email && touched.email
+                    errors.userId && touched.userId
                       ? "text-input error"
                       : "text-input"
                   }
                 />
-                {errors.email && touched.email && (
-                  <div className="input-feedback">{errors.email}</div>
+                {errors.userId && touched.userId && (
+                  <div className="input-feedback">{errors.userId}</div>
                 )}
               </Form.Item>
 
@@ -119,7 +108,7 @@ function LoginPage(props) {
                   placeholder="Enter your password"
                   type="password"
                   value={values.password}
-                  // onChange={handleChange}
+                  onChange={handleChange}
                   onBlur={handleBlur}
                   className={
                     errors.password && touched.password
@@ -185,13 +174,9 @@ function LoginPage(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  loginUser: PropTypes.func.isRequired,
-  user: state.user,
-});
+// const mapStateToProps = (state) => ({
+//   loginUser: PropTypes.func.isRequired,
+//   user: state.user,
+// });
 
-
-// export default withRouter(LoginPage);
-export default connect(mapStateToProps, {
-  loginUser
-})(LoginPage)
+export default LoginPage;

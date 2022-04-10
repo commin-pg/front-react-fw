@@ -1,16 +1,22 @@
-import { LOGIN_ERROR, LOGIN_LOADING, LOGIN_SUCCESS, RESET_PASSWORD } from "../_actions/login_actions";
+import { AUTH_USER, LOGIN_ERROR, LOGIN_LOADING, LOGIN_SUCCESS, RESET_PASSWORD } from "../_actions/login_actions";
 
 const initialState = {
     success: false,
     loading: false,
-    error: {
-        username: null,
-        password: null
-    }
+    auth: false,
+    error: {}
 };
 
 const LoginReducer = function(state = initialState, action) {
+    console.log("====== LoginReducer :::  ", action)
     switch (action.type) {
+        case AUTH_USER:
+            {
+                return {
+                    ...state,
+                    auth: action.success
+                }
+            }
         case LOGIN_LOADING:
             {
                 return {
@@ -23,7 +29,8 @@ const LoginReducer = function(state = initialState, action) {
                 return {
                     ...state,
                     success: true,
-                    loading: false
+                    loading: false,
+                    error: {}
                 };
             }
         case RESET_PASSWORD:
@@ -39,7 +46,7 @@ const LoginReducer = function(state = initialState, action) {
                 return {
                     success: false,
                     loading: false,
-                    error: action.data
+                    error: action.payload
                 };
             }
         default:
