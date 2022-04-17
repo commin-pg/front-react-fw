@@ -24,6 +24,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
             }
 
             dispatch(auth()).then(response => {
+                console.log("auth response", response.payload)
                 //Not Loggined in Status 
                 if (!response.payload.userId) {
                     if (option) {

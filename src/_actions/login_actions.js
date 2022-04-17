@@ -30,12 +30,17 @@ export function auth() {
     const request = axios.post(`${USER_SERVER}/auth`)
         .then((response) => response.data)
         .then((result) => {
-            console.log("AUTH REDUX :::::", result.data)
-            // dispatch(setUserData(result.data));
+            console.log("AUTH REDUX :::::", result)
             return result.data;
         }).catch(e => {
-            console.log("AUTH REDUX :::::", e.response)
-            return e.response;
+            console.log("AUTH REDUX ERR :::::", e.response.data)
+            return {
+                exp: undefined,
+                iat: undefined,
+                id: undefined,
+                userId: null,
+                username: null
+            }
         })
 
 

@@ -1,6 +1,18 @@
+/* StockPage */
+
 .stock-page-search-form{
     border: 1px solid #cdcdcd;
     background-color: #fafafa;
     padding: 0.5rem;
     margin-bottom: 1.2rem;
 }
+
+/* StockCandidatePage */
+
+.empty-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* StockDeletedPage */

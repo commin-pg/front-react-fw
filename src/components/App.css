@@ -1,0 +1,4 @@
+.empty-box {
+    height: 'calc(100vh - 210px)';
+     border: '1px solid #000'
+}
