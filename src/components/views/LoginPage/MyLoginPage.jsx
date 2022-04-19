@@ -1,9 +1,10 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, PageHeader } from "antd";
+import { useAuth } from "hoc/auth.provider";
 
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { Navigate, useLocation, useNavigate, withRouter } from "react-router-dom";
 import jwtService from "../../../services/jwt.service";
 import { loginUser, LOGIN_SUCCESS } from "../../../_actions/login_actions";
 import { setUserData } from "../../../_actions/user_actions";
@@ -16,15 +17,42 @@ function MyLoginPage({ history }) {
   const login = useSelector(state => state.login);
   const user = useSelector(state => state.user);
 
+
+  let navigate = useNavigate();
+  let location = useLocation();
+  let auth = useAuth();
+  let from = location.state?.from?.pathname || '/';
+
   const submitLogin = (e) => {
     e.preventDefault();
-    console.log("LOGIN?")
-    setTimeout(async () => {
-      await dispatch(loginUser({ userId: UserId, password: UserPassword }, history))
-    }, 400)
+    auth.signin(UserId, UserPassword, () => {
+      navigate(from, { replace: true });
+      // window.location.reload(true);
+    });
   };
+
+  // const authCheck = async () => {
+  //   const result = await auth.authCheck((res) => {
+  //     return res.success;
+  //   })
+  //   console.log("result", result)
+  //   // return result ? true : false;
+  //   return true;
+
+  // }
+
+  // if (authCheck()) {
+  //   return <Navigate to={from} replace />;
+  // }
+
+
   return (
     <div>
+
+      <PageHeader
+        className="site-page-header"
+        title="로그인"
+      />
 
       <Form
         name="basic"
@@ -61,4 +89,4 @@ function MyLoginPage({ history }) {
   );
 }
 
-export default withRouter(MyLoginPage);
+export default MyLoginPage

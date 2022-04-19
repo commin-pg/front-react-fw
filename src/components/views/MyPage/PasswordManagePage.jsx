@@ -1,11 +1,12 @@
 import { Alert, Button, Form, Input, message, PageHeader } from 'antd';
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { logoutUser } from '_actions/user_actions';
 import { _changePassword } from '_axios/mypage';
 import localstorageService from "../../../services/localstorage.service";
 
-function PasswordManagePage({ history }) {
+function PasswordManagePage() {
 
     const [UserId, setUserId] = useState(null)
     const [UserPassword, setUserPassword] = useState(null)
@@ -16,6 +17,8 @@ function PasswordManagePage({ history }) {
     })
 
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const auth_user_str = localStorage.getItem('auth_user');
@@ -28,14 +31,17 @@ function PasswordManagePage({ history }) {
 
     const submitLogin = async (e) => {
         e.preventDefault();
-        console.log("LOGIN?")
         if (UserPassword && UserNewPassword && UserNewPasswordConfirm && UserNewPassword === UserNewPasswordConfirm) {
             await _changePassword({ userId: UserId, oldPassword: UserPassword, newPassword: UserNewPassword }).then((result) => {
                 console.log(result)
                 if (result.success) {
                     message.success({ content: 'complete' })
                     setTimeout(async () => {
-                        await dispatch(logoutUser(history))
+                        await dispatch(logoutUser(() => {
+                            console.log("gg")
+                        }))
+
+                        navigate('/login', { replace: true });
                     }, 400)
                 } else {
                     message.error({ content: `${result?.message}` })

@@ -5,3 +5,27 @@
     border:1px solid #fff;
     background-color: antiquewhite;
 }
+
+.welcome-box{
+ display: flex;
+ /* flex-flow: row wrap; */
+ justify-content: space-between;
+ padding: 0 1.2rem
+}
+
+.site-layout-background {
+    padding: 0;
+     background-color: 'white';
+      position: "fixed";
+       z-index: '1';
+        width: '100%'
+}
+
+.welcome-id{
+    display: inline;
+}
+
+.welcome-button{
+    display: inline;
+    color: blue;
+}

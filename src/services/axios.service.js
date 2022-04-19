@@ -9,12 +9,13 @@ const axiosInstance = axios.create({
     headers: {
         Accept: 'application/json',
         useQueryString: 'true',
-        Authorization: 'Bearer ' + ls.getItem("accessToken")
     },
 })
 
 axiosInstance.interceptors.request.use(
     function (config) {
+        if (ls.getItem("accessToken"))
+            config.headers.Authorization = 'Bearer ' + ls.getItem("accessToken")
         return config;
     },
     function (error) {
@@ -24,7 +25,6 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
     function (response) {
-        console.log("RESPONSE!!!", response)
         return response;
     },
     function (error) {

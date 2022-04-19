@@ -1,4 +1,5 @@
 import axios from "axios";
+import { _authCheck, _login } from "_axios/auth/index.js";
 import { USER_SERVER } from "../components/Config.js";
 import jwtService from "../services/jwt.service.js";
 import { setUserData } from "./user_actions.js";
@@ -25,57 +26,30 @@ export function registerUser(dataToSubmit) {
     };
 }
 
-export function auth() {
-
-    const request = axios.post(`${USER_SERVER}/auth`)
-        .then((response) => response.data)
-        .then((result) => {
-            console.log("AUTH REDUX :::::", result)
-            return result.data;
-        }).catch(e => {
-            console.log("AUTH REDUX ERR :::::", e.response.data)
-            return {
-                exp: undefined,
-                iat: undefined,
-                id: undefined,
-                userId: null,
-                username: null
-            }
-        })
-
-
+export async function auth() {
+    const request = await _authCheck();
     return {
         type: AUTH_USER,
         payload: request
     }
 }
 
-export function loginUser(dataToSubmit, history) {
-    return (dispatch) => {
-        dispatch({
-            type: LOGIN_LOADING,
-        });
-        axios
-            .post(`${USER_SERVER}/login`, dataToSubmit)
-            .then((response) => response.data)
-            .then((user) => {
-                jwtService.login(user.data);
-                dispatch(setUserData(user.data));
+export async function loginUser(dataToSubmit) {
 
-                console.log("SAVE", user.data)
-                history.push({
-                    pathname: "/",
-                });
-                return dispatch({
-                    type: LOGIN_SUCCESS,
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-                return dispatch({
-                    type: LOGIN_ERROR,
-                    payload: error.response,
-                });
-            });
+    const request = await _login(dataToSubmit);
+
+    if (request.accessToken)
+        console.log("Login Request", request)
+    else {
+        console.log("Login Fail", request)
+        return {
+            type: LOGIN_ERROR,
+            payload: request,
+        };
+    }
+
+    return {
+        type: LOGIN_USER,
+        payload: request,
     };
 }

@@ -18,16 +18,20 @@ class JwtService {
 
     /** AccessToen & RefreshToken Save In Localstorage And Set to Axios Header */
     setSession = (accessToken, refreshToken) => {
+        // localStorage.removeItem("accessToken")
+        // localStorage.removeItem("refreshToken")
+
         if (accessToken) {
             localStorage.setItem("accessToken", accessToken);
             localStorage.setItem("refreshToken", refreshToken);
-            axios.defaults.headers.common["Authorization"] = "Bearer " + accessToken;
-            axios.defaults.headers.common["refreshToken"] = refreshToken;
+            // axios.defaults.headers.common["Authorization"] = "Bearer " + accessToken;
+            // axios.defaults.headers.common["refreshToken"] = refreshToken;
         } else {
+            localStorage.clear();
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
-            delete axios.defaults.headers.common["Authorization"];
-            delete axios.defaults.headers.common["refreshToken"];
+            // delete axios.defaults.headers.common["Authorization"];
+            // delete axios.defaults.headers.common["refreshToken"];
         }
     };
 

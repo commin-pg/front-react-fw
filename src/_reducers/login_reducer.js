@@ -1,53 +1,47 @@
-import { AUTH_USER, LOGIN_ERROR, LOGIN_LOADING, LOGIN_SUCCESS, RESET_PASSWORD } from "../_actions/login_actions";
+import { AUTH_USER, LOGIN_ERROR, LOGIN_LOADING, LOGIN_SUCCESS, RESET_PASSWORD, LOGIN_USER } from "../_actions/login_actions";
 
 const initialState = {
-    success: false,
-    loading: false,
+    user: {
+        accessToken: undefined,
+        refreshToken: undefined,
+        userData: {
+            id: undefined,
+            userId: undefined,
+            username: undefined
+        }
+    },
     auth: false,
     error: {}
 };
 
-const LoginReducer = function(state = initialState, action) {
+const LoginReducer = function (state = initialState, action) {
     console.log("====== LoginReducer :::  ", action)
     switch (action.type) {
         case AUTH_USER:
             {
                 return {
                     ...state,
-                    auth: action.success
+                    user: action.payload.data,
+                    auth: action.payload.success
                 }
             }
-        case LOGIN_LOADING:
+        case LOGIN_USER:
             {
                 return {
                     ...state,
-                    loading: true
-                };
-            }
-        case LOGIN_SUCCESS:
-            {
-                return {
-                    ...state,
-                    success: true,
-                    loading: false,
+                    user: action.payload,
+                    auth: true,
                     error: {}
-                };
-            }
-        case RESET_PASSWORD:
-            {
-                return {
-                    ...state,
-                    success: true,
-                    loading: false
                 };
             }
         case LOGIN_ERROR:
             {
                 return {
-                    success: false,
-                    loading: false,
+                    ...state,
+                    user: initialState.user,
+                    auth: false,
                     error: action.payload
-                };
+                }
             }
         default:
             {
