@@ -1,9 +1,11 @@
 import { AppstoreAddOutlined, DeleteOutlined, ReloadOutlined } from '@ant-design/icons';
+import { dateToFormatter } from '@utils';
 import { Avatar, Empty, List, message, PageHeader, Popconfirm, Space, Table } from 'antd'
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react'
 import { _stockDeletedList, _stockRestore } from '_axios/finance';
+
 
 function StockDeletedPage() {
     const [GetStockDataAllLoading, setGetStockDataAllLoading] = useState(false)
@@ -57,7 +59,7 @@ function StockDeletedPage() {
                                     verticalAlign: 'middle'
                                 }} >{item.financeType}</Avatar>}
                                 title={<a href={item.compayFinanceDetailUrl} target='_blank'>{item.compayName}</a>}
-                                description={item.regDate}
+                                description={dateToFormatter(item.regDate)}
                             />
                             <Space size="middle">
                                 <Popconfirm

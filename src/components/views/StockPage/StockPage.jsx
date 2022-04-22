@@ -1,5 +1,5 @@
 import { AppstoreAddOutlined, CopyOutlined, DeleteOutlined, HeartFilled, HeartOutlined } from "@ant-design/icons";
-import { Col, Input, Layout, Modal, Pagination, Popconfirm, Row, Select, Space, Table, Tag, Form, Button, message, PageHeader, Progress, Tooltip } from "antd";
+import { Col, Input, Layout, Modal, Pagination, Popconfirm, Row, Select, Space, Table, Tag, Form, Button, message, PageHeader, Progress, Tooltip, Card } from "antd";
 import { useFrameState } from "antd/lib/form/util";
 import Column from "antd/lib/table/Column";
 import ColumnGroup from "antd/lib/table/ColumnGroup";
@@ -274,162 +274,166 @@ function StockPage(props) {
             width={420}
             percent={ProcessRate}
           />
-        </div>) : (<div>
-          <Form className="stock-page-search-form">
-            <Row gutter={24}>
-              <Col span={8} >
-                <Form.Item
-                  label="Sutable:"
-                >
-                  <Select
-                    showSearch
-                    placeholder="Select a person"
-                    optionFilterProp="children"
-                    onChange={onSutableTypeSelect}
-                    // onSearch={onSutableTypeSelect}
-                    defaultValue={null}
-                    filterOption={(input, option) =>
-                      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                    }
+        </div>) : (
+          <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
+
+            <Card>
+              <Form className="stock-page-search-form">
+                <Row gutter={24}>
+                  <Col span={8} >
+                    <Form.Item
+                      label="Sutable:"
+                    >
+                      <Select
+                        showSearch
+                        placeholder="Select a person"
+                        optionFilterProp="children"
+                        onChange={onSutableTypeSelect}
+                        // onSearch={onSutableTypeSelect}
+                        defaultValue={null}
+                        filterOption={(input, option) =>
+                          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                        }
+                      >
+                        <Option value={null} > 전체 </Option>
+                        {SutableSelectItem.map((item, index) => (
+                          <Option value={item.value} >{item.text}</Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+
+
+                  </Col>
+                  <Col span={8}>
+                    <Form.Item
+                      label="Search:"
+                    >
+                      <Input value={Keyword} onChange={e => {
+                        setKeyword(e.currentTarget.value)
+                      }} placeholder="Keyowrd" />
+                    </Form.Item>
+                  </Col>
+
+                  <Col
+                    span={8}
+                    style={{
+                      textAlign: 'left',
+                    }}
                   >
-                    <Option value={null} > 전체 </Option>
-                    {SutableSelectItem.map((item, index) => (
-                      <Option value={item.value} >{item.text}</Option>
-                    ))}
-                  </Select>
-                </Form.Item>
+                    <Button onClick={onSearch}>검색</Button>
+                  </Col>
 
 
-              </Col>
-              <Col span={8}>
-                <Form.Item
-                  label="Search:"
-                >
-                  <Input value={Keyword} onChange={e => {
-                    setKeyword(e.currentTarget.value)
-                  }} placeholder="Keyowrd" />
-                </Form.Item>
-              </Col>
+                </Row>
 
-              <Col
-                span={8}
-                style={{
-                  textAlign: 'left',
-                }}
-              >
-                <Button onClick={onSearch}>검색</Button>
-              </Col>
-
-
-            </Row>
-
-          </Form>
+              </Form>
+            </Card>
 
 
 
-          <Table loading={GetStockDataAllLoading}
-            rowKey={'id'}
-            // columns={colums}
-            dataSource={Datas}
-            bordered
-            scroll={{ x: 1300, y: 500 }}
-            pagination={false}
-          >
-            <Column
-              title=""
-              key="action"
-              align="center"
-              render={(text, record) => (
-                <Space size="middle">
+            <Table loading={GetStockDataAllLoading}
+              rowKey={'id'}
+              // columns={colums}
+              dataSource={Datas}
+              bordered
+              scroll={{ x: 1300, y: 500 }}
+              pagination={false}
+            >
+              <Column
+                title=""
+                key="action"
+                align="center"
+                render={(text, record) => (
+                  <Space size="middle">
 
-                  <Tooltip title="후보 추가" color='gold' key='gold'>
-                    <a style={{ color: 'blue' }} onClick={() => onCandidate(record)}>
-                      {
-                        record.candidate ? <HeartFilled /> : <HeartOutlined />
-                      }
-                    </a>
-                  </Tooltip>
-
-                  <Popconfirm
-                    title="정말 지우시겠습니까?"
-                    onConfirm={() => onDeleteRaw(record)}
-                    okText="Yes"
-                    cancelText="No"
-                  >
-                    <Tooltip title="영구 삭제" color='gold' key='gold'>
-                      <a style={{ color: 'red' }}><DeleteOutlined /></a>
+                    <Tooltip title="후보 추가" color='gold' key='gold'>
+                      <a style={{ color: 'blue' }} onClick={() => onCandidate(record)}>
+                        {
+                          record.candidate ? <HeartFilled /> : <HeartOutlined />
+                        }
+                      </a>
                     </Tooltip>
 
-                  </Popconfirm>
+                    <Popconfirm
+                      title="정말 지우시겠습니까?"
+                      onConfirm={() => onDeleteRaw(record)}
+                      okText="Yes"
+                      cancelText="No"
+                    >
+                      <Tooltip title="영구 삭제" color='gold' key='gold'>
+                        <a style={{ color: 'red' }}><DeleteOutlined /></a>
+                      </Tooltip>
 
-                  <Tooltip title="코드 복사" color='gold' key='gold'>
-                    <a style={{ color: 'gray' }} onClick={() => onCopy(record)}>
-                      {
-                        <CopyOutlined />
-                      }
-                    </a>
+                    </Popconfirm>
 
-                  </Tooltip>
+                    <Tooltip title="코드 복사" color='gold' key='gold'>
+                      <a style={{ color: 'gray' }} onClick={() => onCopy(record)}>
+                        {
+                          <CopyOutlined />
+                        }
+                      </a>
 
-                </Space>
-              )}
-            />
-            <Column title="회사" dataIndex="compayName" key="compayName" render={(text, record) => (<a style={{ color: 'blue' }} onClick={() => onModal(record)}>{text}</a>)}></Column>
-            <ColumnGroup title="투자정보">
-              <Column title="상장주식 수 (천)" dataIndex="sharesNumber" key="sharesNumber"></Column>
-              <Column title="시가총액 (억)" dataIndex="totalMarketCap" key="totalMarketCap"></Column>
-              <Column title="per (%)" dataIndex="perRate" key="perRate"></Column>
-              <Column title="pbr (%)" dataIndex="pbrRate" key="pbrRate"></Column>
-              <Column title="psr (%)" dataIndex="psrRate" key="psrRate"></Column>
-            </ColumnGroup>
+                    </Tooltip>
 
-            <ColumnGroup title="이익률">
-              <Column title="영업이익률(%)" dataIndex="saleProfitRate" key="saleProfitRate"></Column>
-              <Column title="순이익률(%)" dataIndex="salePureProfitRate" key="salePureProfitRate"></Column>
-            </ColumnGroup>
-            <ColumnGroup title="자산현황">
-              <Column title="유보율(%)" dataIndex="cashRate" key="cashRate"></Column>
-              <Column title="부채율(%)" dataIndex="deptRate" key="deptRate"></Column>
+                  </Space>
+                )}
+              />
+              <Column title="회사" dataIndex="compayName" key="compayName" render={(text, record) => (<a style={{ color: 'blue' }} onClick={() => onModal(record)}>{text}</a>)}></Column>
+              <ColumnGroup title="투자정보">
+                <Column title="상장주식 수 (천)" dataIndex="sharesNumber" key="sharesNumber"></Column>
+                <Column title="시가총액 (억)" dataIndex="totalMarketCap" key="totalMarketCap"></Column>
+                <Column title="per (%)" dataIndex="perRate" key="perRate"></Column>
+                <Column title="pbr (%)" dataIndex="pbrRate" key="pbrRate"></Column>
+                <Column title="psr (%)" dataIndex="psrRate" key="psrRate"></Column>
+              </ColumnGroup>
 
-            </ColumnGroup>
-            <Column title="타입" dataIndex="sutableType" key="sutableType" align="center" fixed="right" width={120}
-              render={type => (
-                <Space size="large">
-                  <Tag color={type === 'SUTABLE' ? 'blue' : 'red'}>{type}</Tag>
-                </Space>
-              )}
-            ></Column>
+              <ColumnGroup title="이익률">
+                <Column title="영업이익률(%)" dataIndex="saleProfitRate" key="saleProfitRate"></Column>
+                <Column title="순이익률(%)" dataIndex="salePureProfitRate" key="salePureProfitRate"></Column>
+              </ColumnGroup>
+              <ColumnGroup title="자산현황">
+                <Column title="유보율(%)" dataIndex="cashRate" key="cashRate"></Column>
+                <Column title="부채율(%)" dataIndex="deptRate" key="deptRate"></Column>
 
-          </Table>
+              </ColumnGroup>
+              <Column title="타입" dataIndex="sutableType" key="sutableType" align="center" fixed="right" width={120}
+                render={type => (
+                  <Space size="large">
+                    <Tag color={type === 'SUTABLE' ? 'blue' : 'red'}>{type}</Tag>
+                  </Space>
+                )}
+              ></Column>
 
-          <div style={{ marginTop: '1.2rem' }}></div>
-          <div style={{ textAlign: 'center' }}>
-            <Pagination defaultCurrent={1}
-              showSizeChanger
-              onShowSizeChange={onSizeChanger}
-              showQuickJumper
-              // hideOnSinglePage={true}
-              current={MetaData?.currentPage}
-              total={MetaData?.totalItems}
-              onChange={changePage}
-              pageSize={MetaData?.itemsPerPage ? MetaData?.itemsPerPage : 0}
-            />
+            </Table>
 
-          </div>
+            <div style={{ marginTop: '1.2rem' }}></div>
+            <div style={{ textAlign: 'center' }}>
+              <Pagination defaultCurrent={1}
+                showSizeChanger
+                onShowSizeChange={onSizeChanger}
+                showQuickJumper
+                // hideOnSinglePage={true}
+                current={MetaData?.currentPage}
+                total={MetaData?.totalItems}
+                onChange={changePage}
+                pageSize={MetaData?.itemsPerPage ? MetaData?.itemsPerPage : 0}
+              />
+
+            </div>
 
 
-          <Modal
-            title={ModalData?.compayName}
-            centered
-            visible={Visible}
-            onOk={() => setVisible(false)}
-            onCancel={() => setVisible(false)}
-            width={1200}
-          >
-            <iframe src={ModalData?.compayFinanceDetailUrl} width='100%' height={500}></iframe>
-          </Modal>
+            <Modal
+              title={ModalData?.compayName}
+              centered
+              visible={Visible}
+              onOk={() => setVisible(false)}
+              onCancel={() => setVisible(false)}
+              width={1200}
+            >
+              <iframe src={ModalData?.compayFinanceDetailUrl} width='100%' height={500}></iframe>
+            </Modal>
 
-        </div>)
+          </Space>)
     }
 
 

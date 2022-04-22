@@ -26,6 +26,7 @@ function MyLoginPage({ history }) {
   const submitLogin = (e) => {
     e.preventDefault();
     auth.signin(UserId, UserPassword, () => {
+
       navigate(from, { replace: true });
       // window.location.reload(true);
     });

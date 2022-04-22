@@ -55,6 +55,7 @@ function MainLayout({ history }) {
       {/* <Header className="site-layout-background" style={{ padding: 0, backgroundColor: 'white', position: "fixed", zIndex: '1', width: '100%' }}>
         <AuthState />
       </Header> */}
+      <AuthState toggle={toggle} Collapsed={Collapsed} />
       <Layout>
 
         <Sider trigger={null}
@@ -132,7 +133,7 @@ function MainLayout({ history }) {
             </SubMenu>
           </Menu>
 
-          <div className='menu-collapsed-btn' style={{ color: 'white' }} onClick={toggle}><ArrowLeftOutlined /></div>
+          {/* <div className='menu-collapsed-btn' style={{ color: 'white' }} onClick={toggle}><ArrowLeftOutlined /></div> */}
         </Sider>
 
 

@@ -1,12 +1,25 @@
 import moment from "moment";
 
+
+export function dateToFormatter(date) {
+  const formmater = moment(date).format("YYYY-DD-MM HH:mm:ss");
+  return formmater;
+}
+
+
+export function dateToFormatterCustom(date, format) {
+  const formmater = moment(date).format(format);
+  return formmater;
+}
+
+
 export function debounce(func, wait, immediate) {
   var timeout;
-  return function() {
+  return function () {
     var context = this,
       args = arguments;
     clearTimeout(timeout);
-    timeout = setTimeout(function() {
+    timeout = setTimeout(function () {
       timeout = null;
       if (!immediate) func.apply(context, args);
     }, wait);
@@ -72,7 +85,7 @@ export function scrollTo(scrollableElement, elmID) {
   if (stopY > startY) {
     for (var i = startY; i < stopY; i += step) {
       setTimeout(
-        (function(leapY) {
+        (function (leapY) {
           return () => {
             scrollableElement.scrollTo(0, leapY);
           };
@@ -87,7 +100,7 @@ export function scrollTo(scrollableElement, elmID) {
   }
   for (let i = startY; i > stopY; i -= step) {
     setTimeout(
-      (function(leapY) {
+      (function (leapY) {
         return () => {
           scrollableElement.scrollTo(0, leapY);
         };
@@ -129,7 +142,7 @@ export function getQueryParam(prop) {
     window.location.href.slice(window.location.href.indexOf("?") + 1)
   );
   var definitions = search.split("&");
-  definitions.forEach(function(val, key) {
+  definitions.forEach(function (val, key) {
     var parts = val.split("=", 2);
     params[parts[0]] = parts[1];
   });
@@ -144,9 +157,9 @@ export function classList(classes) {
 }
 
 export function initCodeViewer() {
-  if(!document) return;
+  if (!document) return;
   const pre = document.getElementsByTagName('pre');
-  if(!pre.length) return;
+  if (!pre.length) return;
   Array.prototype.map.call(pre, p => {
     // console.log(p);
     p.classList.add('collapsed');
@@ -159,5 +172,5 @@ export function initCodeViewer() {
   // pre.map(p => {
   //   console.log(p)
   // })
-  
+
 }

@@ -13,7 +13,7 @@ import NoAuthLayout from "./layout/NoAuthLayout";
 // pages for this product
 import LandingPage from "./views/LandingPage/LandingPage";
 import MyLoginPage from "./views/LoginPage/MyLoginPage";
-import FinanceManagePage from "./views/MyPage/FinanceManagePage";
+import InvestmentManagePage from "./views/MyPage/InvestmentManagePage";
 import PasswordManagePage from "./views/MyPage/PasswordManagePage";
 import StockMangePage from "./views/MyPage/StockMangePage";
 import StockCandidatePage from "./views/StockPage/StockCandidatePage";
@@ -29,21 +29,19 @@ function App() {
     <AuthProvider>
       <Suspense fallback={<LoadingOutlined />}>
         <Routes>
-          <Route element={<AuthState />}>
-            <Route element={<MainLayout />}>
-              <Route path='/' element={<RequireAuth><LandingPage /></RequireAuth>} />
-              <Route path='/stock/' element={<RequireAuth><StockPage /></RequireAuth>} />
-              <Route path='/stock/deleted' element={<RequireAuth><StockDeletedPage /></RequireAuth>} />
-              <Route path='/stock/candidate' element={<RequireAuth><StockCandidatePage /></RequireAuth>} />
+          {/* <Route element={<AuthState />}> */}
+          <Route element={<MainLayout />}>
+            <Route path='/' element={<RequireAuth><LandingPage /></RequireAuth>} />
+            <Route path='/stock/' element={<RequireAuth><StockPage /></RequireAuth>} />
+            <Route path='/stock/deleted' element={<RequireAuth><StockDeletedPage /></RequireAuth>} />
+            <Route path='/stock/candidate' element={<RequireAuth><StockCandidatePage /></RequireAuth>} />
 
 
-              <Route path='/mypage/finance_manage' element={<RequireAuth><FinanceManagePage /></RequireAuth>} />
-              <Route path='/mypage/stock_manage' element={<RequireAuth><StockMangePage /></RequireAuth>} />
-              <Route path='/mypage/password' element={<RequireAuth><PasswordManagePage /></RequireAuth>} />
-
-            </Route>
-
+            <Route path='/mypage/finance_manage' element={<RequireAuth><InvestmentManagePage /></RequireAuth>} />
+            <Route path='/mypage/stock_manage' element={<RequireAuth><StockMangePage /></RequireAuth>} />
+            <Route path='/mypage/password' element={<RequireAuth><PasswordManagePage /></RequireAuth>} />
           </Route>
+          {/* </Route> */}
 
 
           <Route element={<NoAuthLayout />}>

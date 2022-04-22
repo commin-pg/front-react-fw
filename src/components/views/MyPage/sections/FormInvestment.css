@@ -1,0 +1,18 @@
+.investment-config-container{
+    display: flex;
+    justify-content: space-around;
+    padding: 0.938rem;
+    border: 1px solid #e8e8e8;
+    background-color: #fff;
+    gap: 0.625rem;
+}
+
+.investment-config-container-divider{
+    border-right: 1px solid #e8e8e8;
+    margin: 0 0.313rem;
+}
+
+.investment-config-container-item{
+    display: flex;
+    justify-content: center;
+}
