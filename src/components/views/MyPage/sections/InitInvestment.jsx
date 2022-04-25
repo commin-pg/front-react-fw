@@ -45,7 +45,7 @@ function InitInvestment(props) {
                 min={10000}
                 max={100000000000}
                 autoFocus={true}
-                formatter={value => `₩ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                 parser={value => value.replace(/\$\s?|(,*)/g, '')}
                 disabled={Loading} bordered={false} onChange={onChangeVal} style={{ paddingTop: '30px', paddingBottom: '30px', paddingLeft: '20px', paddingRight: '20px', width: '100%', color: 'blue', fontWeight: 'bold' }} />
             <div style={{ marginTop: '1.2rem', marginBottom: '1.2rem' }}></div>
